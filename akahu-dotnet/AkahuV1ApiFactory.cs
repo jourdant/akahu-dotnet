@@ -9,7 +9,7 @@ namespace Akahu.Api
     public static class AkahuV1ApiFactory
     {
         /// <summary>
-        /// Added generics for future compatibility reasons
+        /// AkahuV1ApiFactory instantiates a class from IAkahuV1Api with the correct properties configured.
         /// </summary>
         public static IAkahuV1Api GetApiClient(string apiBaseUrl, string apiAppAccessToken, string apiUserAccessToken)
         {

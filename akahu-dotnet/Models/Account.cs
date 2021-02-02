@@ -21,24 +21,5 @@ namespace Akahu.Api.Models
         [JsonPropertyName("meta")]
         public Dictionary<string, object> Metadata { get; set; }
         public Branch Branch { get; set; }
-
-        public string Owner
-        {
-            get
-            {
-                var ret = "";
-                if (IsBank == true && Type =="CHECKING" && Metadata.ContainsKey("original_holder"))
-                {
-                    var temp = Metadata["original_holder"]?.ToString().Replace("LTD", "LIMITED").ToLower();
-                    if (temp.Contains("templeton")) ret = "Personal";
-                    else if (temp.Contains("senere")) ret = "Senere Limited";
-                    else if (temp.Contains("aon")) ret = "AON Future Trust";
-                    else if (temp.Contains("integra")) ret = "Integra Consulting NZ Limited";
-                    else ret = temp;
-                }
-
-                return ret;
-            }
-        }
     }
 }
