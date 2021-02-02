@@ -7,6 +7,6 @@ A .NET Standard implementation of the Akahu.io v1 REST API. More information her
 var apiClient = AkahuV1ApiFactory.GetApiClient(baseUrl, appToken, userToken);
 
 //test api
-var accounts = await pw.GetAccountsAsync();
+var accounts = await apiClient.GetAccountsAsync();
 accounts.ForEach(x => Console.WriteLine(x.Name));
 ```
