@@ -38,5 +38,12 @@ namespace Akahu.Api
 
         [Get("/v1/merchants/{merchantId}")]
         Task<AkahuResponse<Merchant>> GetMerchantAsync(string merchantId);
+
+        [Get("v1/payments")]
+        Task<AkahuListResponse<Payment>> GetPaymentsAsync();
+        [Get("v1/payments")]
+        Task<AkahuListResponse<Payment>> GetPaymentsAsync([Query][AliasAs("start")]DateTimeOffset startDate, [Query][AliasAs("end")]DateTimeOffset endDate);
+        [Post("v1/payments")]
+        Task<AkahuListResponse<Payment>> CreatePayment(PaymentRequest paymentRequest);
     }
 }
