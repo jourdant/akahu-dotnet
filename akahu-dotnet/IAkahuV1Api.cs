@@ -2,7 +2,6 @@
 using Refit;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Akahu.Api
@@ -46,28 +45,25 @@ namespace Akahu.Api
 
 
         #region Merchants
-        [Get("/v1/merchants")]
-        Task<AkahuListResponse<Merchant>> GetMerchantsAsync();
-
         [Get("/v1/merchants/{merchantId}")]
         Task<AkahuResponse<Merchant>> GetMerchantAsync(string merchantId);
         #endregion
 
 
         #region Payments
-        [Get("v1/payments")]
-        Task<AkahuListResponse<Payment>> GetPaymentsAsync();
+        //[Get("/v1/payments")]
+        //Task<AkahuListResponse<Payment>> GetPaymentsAsync();
 
-        [Get("v1/payments")]
+        [Get("/v1/payments")]
         Task<AkahuListResponse<Payment>> GetPaymentsAsync([Query][AliasAs("start")]DateTimeOffset startDate, [Query][AliasAs("end")]DateTimeOffset endDate);
         
-        [Post("v1/payments")]
+        [Post("/v1/payments")]
         Task<AkahuListResponse<Payment>> CreatePayment(PaymentRequest paymentRequest);
         #endregion
 
 
         #region Standing Orders
-        [Get("v1/standing-orders")]
+        [Get("/v1/standing-orders")]
         Task<AkahuListResponse<StandingOrder>> GetStandingOrdersAsync();
         #endregion
 
@@ -78,6 +74,18 @@ namespace Akahu.Api
 
         [Get("/v1/statements/{statementId}")]
         Task<AkahuResponse<Statement>> GetStatementAsync(string statementId);
+        #endregion
+
+
+        #region Transactions
+        [Get("/v1/transactions")]
+        Task<AkahuListResponse<Transaction>> GetTransactionsAsync([Query][AliasAs("start")]DateTimeOffset startDate, [Query][AliasAs("end")]DateTimeOffset endDate);
+
+        [Get("/v1/accounts/{accountId}/transactions")]
+        Task<AkahuListResponse<Transaction>> GetTransactionsByAccountAsync(string accountId, [Query][AliasAs("start")]DateTimeOffset startDate, [Query][AliasAs("end")]DateTimeOffset endDate);
+
+        [Post("/v1/transactions/ids")]
+        Task<AkahuListResponse<Transaction>> GetTransactionsByIdsAsync([Body]List<string> transactionIds);
         #endregion
     }
 }
