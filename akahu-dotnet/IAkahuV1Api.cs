@@ -13,6 +13,6 @@ namespace Akahu.Api
         Task<AkahuListResponse<Account>> GetAccountsAsync();
 
         [Get("/v1/accounts/{accountId}")]
-        Task<Account> GetAccountAsync(string accountId);
+        Task<AkahuResponse<Account>> GetAccountAsync(string accountId);
     }
 }
