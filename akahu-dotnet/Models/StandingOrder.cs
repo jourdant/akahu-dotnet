@@ -25,7 +25,8 @@ namespace Akahu.Api.Models
         public DateTimeOffset EndAt { get; set; }
         public PaymentRequestDetail Metadata { get; set; }
 
-        //need to add period
+        //TODO: Add new property 'period'
+
         public double Amount { get; set; }
     }
 }

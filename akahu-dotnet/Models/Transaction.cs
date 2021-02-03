@@ -27,6 +27,6 @@ namespace Akahu.Api.Models
         public string Type { get; set; }
         public string Logo { get; set; }
 
-        //add location
+        //TODO: Add new property 'location'
     }
 }

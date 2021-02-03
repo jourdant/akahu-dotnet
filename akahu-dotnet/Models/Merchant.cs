@@ -20,7 +20,8 @@ namespace Akahu.Api.Models
         public string Phone { get; set; }
         public string Profile { get; set; }
 
-        //social property needs to be added
+        //TODO: Add new property 'social'
+
         [JsonPropertyName("updated_at")]
         public DateTimeOffset UpdatedAt { get; set; }
     }
