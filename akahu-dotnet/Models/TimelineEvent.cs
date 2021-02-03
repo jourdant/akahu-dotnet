@@ -2,7 +2,7 @@
 
 namespace Akahu.Api.Models
 {
-    public class PaymentEvent
+    public class TimelineEvent
     {
         public string Status { get; set; }
         public DateTimeOffset Time { get; set; }

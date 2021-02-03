@@ -35,7 +35,7 @@ namespace Akahu.Api
         #endregion
 
 
-        #region Refresh
+        #region Data Refresh
         [Post("/v1/refresh")]
         Task<AkahuResponseBase> RefreshAllAccountsAsync();
 
@@ -55,7 +55,9 @@ namespace Akahu.Api
         //Task<AkahuListResponse<Payment>> GetPaymentsAsync();
 
         [Get("/v1/payments")]
-        Task<AkahuListResponse<Payment>> GetPaymentsAsync([Query][AliasAs("start")]DateTimeOffset startDate, [Query][AliasAs("end")]DateTimeOffset endDate);
+        Task<AkahuListResponse<Payment>> GetPaymentsAsync(
+            [Query(Format = "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")][AliasAs("start")]DateTimeOffset startDate,
+            [Query(Format = "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")][AliasAs("end")]DateTimeOffset endDate);
         
         [Post("/v1/payments")]
         Task<AkahuListResponse<Payment>> CreatePayment(PaymentRequest paymentRequest);
@@ -79,13 +81,56 @@ namespace Akahu.Api
 
         #region Transactions
         [Get("/v1/transactions")]
-        Task<AkahuListResponse<Transaction>> GetTransactionsAsync([Query][AliasAs("start")]DateTimeOffset startDate, [Query][AliasAs("end")]DateTimeOffset endDate);
+        Task<AkahuListResponse<Transaction>> GetTransactionsAsync(
+            [Query(Format = "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")][AliasAs("start")]DateTimeOffset startDate,
+            [Query(Format = "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")][AliasAs("end")]DateTimeOffset endDate);
 
         [Get("/v1/accounts/{accountId}/transactions")]
-        Task<AkahuListResponse<Transaction>> GetTransactionsByAccountAsync(string accountId, [Query][AliasAs("start")]DateTimeOffset startDate, [Query][AliasAs("end")]DateTimeOffset endDate);
+        Task<AkahuListResponse<Transaction>> GetTransactionsByAccountAsync(
+            string accountId,
+            [Query(Format = "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")][AliasAs("start")]DateTimeOffset startDate,
+            [Query(Format = "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")][AliasAs("end")]DateTimeOffset endDate);
 
         [Post("/v1/transactions/ids")]
         Task<AkahuListResponse<Transaction>> GetTransactionsByIdsAsync([Body]List<string> transactionIds);
+        #endregion
+
+
+        #region Transfers
+        [Get("/v1/transfers")]
+        Task<AkahuListResponse<Transfer>> GetTransfersAsync(
+            [Query(Format = "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")][AliasAs("start")]DateTimeOffset startDate,
+            [Query(Format = "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")][AliasAs("end")]DateTimeOffset endDate);
+
+        [Get("/v1/transfers/{transferId}")]
+        Task<AkahuResponse<Transfer>> GetTransferAsync(string transferId);
+
+        [Post("/v1/transfers")]
+        Task<AkahuConfirmationResponse> CreateTransfer([Body]TransferRequest transferRequest);
+        #endregion
+
+
+        #region Users
+        [Get("/v1/me")]
+        Task<AkahuResponse<User>> GetCurrentUserAsync();
+
+        [Get("/v1/me/details")]
+        Task<AkahuListResponse<UserProperty>> GetTransfersAsync();
+        #endregion
+
+
+        #region Users
+        [Get("/v1/webhooks")]
+        Task<AkahuListResponse<Webhook>> GetWebhooksAsync();
+
+        [Post("/v1/webhooks")]
+        Task<AkahuListResponse<Webhook>> CreateWebhookAsync(WebhookRequest webhookRequest);
+
+        [Delete("/v1/webhooks/{webhookId}")]
+        Task<AkahuResponseBase> DeleteWebhookAsync(string webhookId);
+
+        [Get("/v1/keys/{keyId}")]
+        Task<AkahuResponse<string>> GetPublicKeyAsync(string keyId);
         #endregion
     }
 }

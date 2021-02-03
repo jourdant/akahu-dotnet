@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Akahu.Api.Models
 {
     public class Transaction : AkahuModelBase
     {
+        [JsonPropertyName("_account")]
         public string AccountId { get; set; }
+        [JsonPropertyName("_connection")]
         public string ConnectionId { get; set; }
+        [JsonPropertyName("_category")]
         public string CategoryId { get; set; }
 
         public DateTimeOffset CreatedAt { get; set; }
