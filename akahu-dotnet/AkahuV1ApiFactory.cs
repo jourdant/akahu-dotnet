@@ -12,7 +12,7 @@ namespace Akahu.Api
         /// <summary>
         /// AkahuV1ApiFactory instantiates a class from IAkahuV1Api with the correct properties configured.
         /// </summary>
-        public static IAkahuV1Api GetApiClient(string apiBaseUrl, string apiAppAccessToken, string apiUserAccessToken)
+        public static IAkahuV1Api GetApiClient(string apiAppAccessToken, string apiUserAccessToken, string apiBaseUrl = "https://api.akahu.io")
         {
             //set up HttpClient with correct auth headers
             var apiHttpClient = new HttpClient();
